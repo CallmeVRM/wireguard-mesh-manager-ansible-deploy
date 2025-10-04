@@ -3,8 +3,6 @@ Déployez les fichiers de configurer générés avec Wireguard Mesh Manager
 
 ## 🧱 Structure du projet
 ```bash
-
-
 .
 ├── inventory.ini
 ├── playbook_install_wireguard.yml     
@@ -15,13 +13,12 @@ Déployez les fichiers de configurer générés avec Wireguard Mesh Manager
     └── wireguard_config/
         ├── tasks/
         │   ├── main.yml
-        │   ├── verify.yml
-        │   └── rollback.yml
+        │   └── verify.yml
         └── handlers/main.yml
         └── files/
-            ├── node01.conf
-            ├── node02.conf
-            └── node03.conf
+            ├── node-xxx01.conf
+            ├── node-xxx02.conf
+            └── node-xxx03.conf
 ```
 
 ## Clonez la répository :
@@ -35,7 +32,7 @@ PS : `wg_conf_file=node-prod-services-ipv4.conf  (selon la convention, node-<nom
 [wireguard_nodes]
 prod-services-ipv4 ansible_host=20.51.131.162 wg_conf_file=node-prod-services-ipv4.conf
 prod-databases-ipv4 ansible_host=172.190.75.205 wg_conf_file=node-prod-databases-ipv4.conf
-prod-monitoring-ipv4 ansible_host=14.236.132.228 wg_conf_file=node-prod-monitoring-ipv4.conf
+prod-monitoring-ipv4 ansible_host=4.236.132.228 wg_conf_file=node-prod-monitoring-ipv4.conf
 ```
 
 ## Organisation des playbooks WireGuard
@@ -56,3 +53,7 @@ ansible-playbook -i inventory.ini playbook_install_wireguard.yml
 
 ### Configuration :  
 ansible-playbook -i inventory.ini playbook_config_wireguard.yml
+
+
+## Petite vidéo pour accompagner la mise en place :
+
