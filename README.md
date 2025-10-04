@@ -23,7 +23,7 @@ Déployez les fichiers de configurer générés avec Wireguard Mesh Manager
 
 ## Clonez la répository :
 
-git clone && cd 
+git clone https://github.com/CallmeVRM/wireguard-mesh-manager-ansible-deploy.git && cd wireguard-mesh-manager-ansible-deploy
 
 ## 🗂️ inventory.ini
 Chaque serveur est associé à son fichier de configuration :
