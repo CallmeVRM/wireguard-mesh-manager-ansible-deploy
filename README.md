@@ -54,6 +54,4 @@ ansible-playbook -i inventory.ini playbook_install_wireguard.yml
 ### Configuration :  
 ansible-playbook -i inventory.ini playbook_config_wireguard.yml
 
-
-## Petite vidéo pour accompagner la mise en place :
-
+Enjoy !
