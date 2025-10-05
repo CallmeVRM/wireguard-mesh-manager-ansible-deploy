@@ -1,0 +1,40 @@
+---
+- name: Vérifier la présence du répertoire WireGuard
+  ansible.builtin.file:
+    path: "{{ wg_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0700'
+
+- name: Sauvegarder l’ancienne configuration WireGuard (si présente)
+  ansible.builtin.copy:
+    src: "{{ wg_dir }}/{{ wg_interface }}.conf"
+    dest: "{{ wg_dir }}/{{ wg_interface }}.conf.bak"
+    remote_src: true
+  ignore_errors: true
+
+- name: Copier la nouvelle configuration WireGuard spécifique au serveur
+  ansible.builtin.copy:
+    src: "{{ wg_conf_file }}"
+    dest: "{{ wg_dir }}/{{ wg_interface }}.conf"
+    owner: root
+    group: root
+    mode: '0600'
+  register: wg_conf
+  notify: Redémarrer WireGuard
+
+- name: Vérifier la validité de la configuration avant activation
+  ansible.builtin.command: "wg-quick strip {{ wg_dir }}/{{ wg_interface }}.conf"
+  register: wg_check
+  failed_when: wg_check.rc != 0
+  changed_when: false
+
+- name: Activer le service WireGuard au démarrage
+  ansible.builtin.systemd:
+    name: "wg-quick@{{ wg_interface }}"
+    enabled: true
+    state: started
+
+- name: Vérifier l’état de l’interface WireGuard après déploiement
+  ansible.builtin.include_tasks: verify.yml

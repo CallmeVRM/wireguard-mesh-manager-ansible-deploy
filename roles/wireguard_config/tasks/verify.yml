@@ -1,0 +1,13 @@
+---
+- name: Vérifier que l’interface WireGuard est bien active
+  ansible.builtin.command: wg show {{ wg_interface }}
+  register: wg_show
+  failed_when: "'interface:' not in wg_show.stdout"
+  changed_when: false
+
+- name: Afficher la configuration WireGuard active
+  ansible.builtin.debug:
+    msg: |
+      Interface {{ wg_interface }} active.
+      Configuration :
+      {{ wg_show.stdout }}
