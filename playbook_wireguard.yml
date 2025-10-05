@@ -1,9 +1,0 @@
----
-- name: Déploiement des configurations WireGuard
-  hosts: wireguard_nodes
-  become: true
-  vars:
-    wg_interface: wg0
-    wg_dir: /etc/wireguard
-  roles:
-    - wireguard_deploy
