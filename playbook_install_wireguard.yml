@@ -1,0 +1,6 @@
+---
+- name: Installation de WireGuard sur les serveurs
+  hosts: wireguard_nodes
+  become: true
+  roles:
+    - wireguard_install
